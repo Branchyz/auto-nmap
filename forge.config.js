@@ -13,10 +13,6 @@ module.exports = {
       config: {},
     },
     {
-      name: "@electron-forge/maker-zip",
-      platforms: ["darwin"],
-    },
-    {
       name: "@electron-forge/maker-deb",
       config: {
         options: {
@@ -26,7 +22,17 @@ module.exports = {
     },
     {
       name: "@electron-forge/maker-rpm",
-      config: {},
+      config: {
+        options: {
+          icon: "./icons/icon.png",
+        },
+      },
+    },
+    {
+      name: "@electron-forge/maker-dmg",
+      config: {
+        icon: "./icons/icon.icns",
+      },
     },
   ],
   plugins: [
