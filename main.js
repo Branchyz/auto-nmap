@@ -1,37 +1,34 @@
-const { updateElectronApp } = require('update-electron-app');
-updateElectronApp();
+const { app, BrowserWindow } = require("electron");
 
-const { app, BrowserWindow } = require('electron')
+function createWindow() {
+  const win = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+      enableRemoteModule: true,
+    },
 
-function createWindow () {
-    const win = new BrowserWindow({
-        width: 800,
-        height: 600,
-        webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false,
-            enableRemoteModule: true
-        },
+    icon: "./icons/icon.png",
+  });
 
-        icon: './icons/icon.png'
-    })
-    
-    win.setMenu(null)
-    win.loadFile('index.html')
+  win.setMenu(null);
+  win.loadFile("index.html");
 }
 
 app.whenReady().then(() => {
-    createWindow()
-    
-    app.on('activate', () => {
-        if (BrowserWindow.getAllWindows().length === 0) {
-            createWindow()
-        }
-    })
-})
+  createWindow();
 
-app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        app.quit()
+  app.on("activate", () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+      createWindow();
     }
-})
+  });
+});
+
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
+    app.quit();
+  }
+});

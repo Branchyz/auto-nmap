@@ -1,5 +1,4 @@
 const { exec } = require('child_process');
-const { parse } = require('path');
 
 const { promisify } = require('util');
 const execAsync = promisify(exec);
@@ -44,13 +43,13 @@ startBtn.addEventListener('click', async () => {
         alert('Subnet should be a number');
         return;
     }
-    
+
     seconds = parseInt(seconds);
     if(isNaN(seconds)) {
         alert('Interval should be a number');
         return;
     }
-    
+
 
     if(seconds < 5) {
         alert('Interval should be at least 5 seconds');
@@ -111,7 +110,7 @@ const parseNmap = (nmapOutput, subnet) => {
     lines.shift();
     lines.pop();
     lines.pop();
-    
+
     const result = [];
 
     for (let i = 0; i < lines.length; i += 3) {
@@ -126,7 +125,7 @@ const parseNmap = (nmapOutput, subnet) => {
             const ip = lines[i].split(' ')[4];
             const mac = lines[i + 2].split(' ')[2];
             const vendor = lines[i + 2].substring(lines[i + 2].indexOf('(') + 1, lines[i + 2].lastIndexOf(')'));
-    
+
             result.push({ ip, mac, vendor });
         }
     }
@@ -144,7 +143,7 @@ const populateTable = (results) => {
     for (const { ip, mac, vendor } of results) {
         const row = document.createElement('tr');
         row.classList.add('even:bg-gray-100', 'odd:bg-gray-200');
-        
+
         const ipCell = document.createElement('td');
         const macCell = document.createElement('td');
         const vendorCell = document.createElement('td');
